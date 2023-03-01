@@ -1,9 +1,8 @@
 repeat wait() until game:IsLoaded() == true
 
 if game.PlaceId == 3351674303 then -- Driving Empire
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/WindyKung/WindyWare/main/MainScript/DrivingEmpire.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/HUB/main/whitelist_output2.lua"))()
 
 elseif game.PlaceId == 1204965839 then -- Wolves' Life 3
-   loadstring(game:HttpGet('https://gist.githubusercontent.com/alexbomb6666/17e021cbeb0d1205654b409048043ccc/raw/3fbed299a3bb368a9811fc8b3fdee6346ce2f75b/wl3_syronix'))()
-
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/HUB/main/whitelist_output.lua"))()
 end
