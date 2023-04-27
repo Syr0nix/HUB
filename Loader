@@ -7,5 +7,5 @@ local function ontp(s)
 end
 task.wait(3)
 game.ReplicatedStorage:WaitForChild("Constants")
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/HUB/main/Whitelisted_3'))();
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/HUB/main/Whitelisted_3'))()
 ontp("if not game:IsLoaded() then game.Loaded:Wait(3) end wait(3) if not game.Players.LocalPlayer.Character then game.Players.LocalPlayer.CharacterAdded:Wait() end loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/HUB/main/Loader'))()");
