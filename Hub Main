@@ -7,6 +7,5 @@ elseif game.PlaceId == 1204965839 then -- Wolves' Life 3
  loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/HUB/main/whitelist_output.lua"))();
 
 elseif game.PlaceId == 370731277 then -- MeepCity
-task.wait(5)
  loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/HUB/main/Loader"))();
 end
