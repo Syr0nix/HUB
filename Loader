@@ -1,3 +1,4 @@
+task.wait(2)
 local function ontp(s)
     if syn and syn.queue_on_teleport then
         syn.queue_on_teleport(s)
