@@ -53,7 +53,7 @@ end)
 local Tab = Window.NewTab("VIW")
 local Section = Tab.NewSection("Wana Be VIW")
 local Button = Section.NewButton("VIW TAG",function()
-	game.ReplicatedStorage.MasterKey:FireServer("AddVIWTag", nil, "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD")
+	game.ReplicatedStorage.MasterKey:FireServer("AddVIWTag", nil, "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD");
 end)
 local Button = Section.NewButton("Remove Name tags",function()
 	local args = {[1] = "ChangeDesc",[2] = "",[3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151\153"}
