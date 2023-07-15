@@ -11,7 +11,7 @@
 
 --]]
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/UI-lib-NEW/main/WL"))()
-Window = Library.Main("WLF3 Syr0nix#0407","RightShift")
+Window = Library.Main("WLF3 Syr0nix#0407","F5")
 local Tab = Window.NewTab("Gamepeass")
 local Section = Tab.NewSection("BE FREE")
 local Button = Section.NewButton("Wings",function()
