@@ -11,7 +11,7 @@
 
 --]]
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/UI-lib-NEW/main/WL"))()
-Window = Library.Main("WLF3 Syr0nix#0407","F5")
+Window = Library.Main("WLF3 Syr0nix#0407","RightShift")
 local Tab = Window.NewTab("Gamepeass")
 local Section = Tab.NewSection("BE FREE")
 local Button = Section.NewButton("Wings",function()
@@ -53,7 +53,7 @@ end)
 local Tab = Window.NewTab("VIW")
 local Section = Tab.NewSection("Wana Be VIW")
 local Button = Section.NewButton("VIW TAG",function()
-	game.ReplicatedStorage.MasterKey:FireServer("AddVIWTag", nil, "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD");
+	game.ReplicatedStorage.MasterKey:FireServer("AddVIWTag", nil, "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD")
 end)
 local Button = Section.NewButton("Remove Name tags",function()
 	local args = {[1] = "ChangeDesc",[2] = "",[3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151\153"}
@@ -233,6 +233,23 @@ end)
 local Button = Section.NewButton("Homebrew Admin",function()
 _G.CustomUI = false
 	loadstring(game:HttpGet(('https://raw.githubusercontent.com/mgamingpro/HomebrewAdmin/master/Main'),true))()
+end)
+local Button = Section.NewButton("OG fling",function()
+-- FE Fling Spin
+-- Lock on to player And fling together works all the time :)
+-- Made by syr0nix
+power = 1500 -- change this to make it more or less powerful
+game:GetService('RunService').Stepped:connect(function()
+game.Players.LocalPlayer.Character.Head.CanCollide = false
+game.Players.LocalPlayer.Character.Torso.CanCollide = false
+game.Players.LocalPlayer.Character["Left Leg"].CanCollide = false
+game.Players.LocalPlayer.Character["Right Leg"].CanCollide = false
+end)
+wait(.1)
+local bambam    = Instance.new("BodyThrust")
+bambam.Parent   = game.Players.LocalPlayer.Character.HumanoidRootPart
+bambam.Force    = Vector3.new(power,0,power)
+bambam.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
 end)
 local Button = Section.NewButton("Chat Logger",function()
 -- Version: 2.82
