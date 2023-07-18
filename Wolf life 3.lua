@@ -191,6 +191,42 @@ local Button = Section.NewButton("Crash Server", function()
         task.wait()
     end
 end)
+local NAME = ''
+local BringButton = Section.NewButton("Bring Player", function()
+    local playerToBring = findPlayer(NAME)
+    if playerToBring then
+        game:GetService("ReplicatedStorage").CarryNewborn:FireServer(playerToBring)
+        wait(0.2)
+        game:GetService("ReplicatedStorage").MasterKey:FireServer("Spawn", "Adoption")
+        wait(0.2)
+        game:GetService("ReplicatedStorage").CarryNewborn:FireServer("Kick Eggs")
+        wait(0.2)
+    end
+end)
+function playerCheck(p)
+    if type(p)=='boolean'or p == nil then return false end
+    if game:GetService('Players'):FindFirstChild(p)then
+        return game:GetService('Players'):FindFirstChild(p)
+    end
+end
+function findPlayer(name)
+    for _,p in next,game:GetService('Players'):GetPlayers()do
+        local pn = string.lower(p.Name)
+        local pd = string.lower(p.DisplayName)
+        if (string.sub(name,1,#name)==string.sub(pn,1,#name) or string.sub(name,1,#name)==string.sub(pd,1,#name)) then
+            return p
+        end
+    end
+    return false
+end
+
+local plr = Section.Newtextbox('Player Name',function(self,value)
+    local _plr = findPlayer(value)
+    if _plr then
+        NAME = _plr.Name
+        self.Text = NAME
+    end
+end)
 local Button = Section.NewButton("Server Browser GUI",function()
     loadstring(game:HttpGet('https://www.scriptblox.com/raw/Server-Browser_80', true))();
 end)
