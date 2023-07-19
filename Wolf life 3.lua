@@ -86,6 +86,31 @@ local Button = Section.NewButton("RTX", function()
     a.Decay = Color3.fromRGB(159, 43, 104)
     print("Rtx Enabled")
 end)
+local Button = Section.NewButton("FPS BOOSTER", function()
+   local decalsyeeted = true
+local game = game
+local workspace = game.Workspace
+local lighting = game.Lighting
+local terrain = workspace.Terrain
+terrain.WaterWaveSize = 0
+terrain.WaterWaveSpeed = 0
+terrain.WaterReflectance = 0
+terrain.WaterTransparency = 0
+lighting.GlobalShadows = false
+lighting.FogEnd = 9e9
+lighting.Brightness = 0
+settings().Rendering.QualityLevel = "Level01"
+for _, object in pairs(game:GetDescendants()) do
+    if object:IsA("Part") or object:IsA("Union") or object:IsA("MeshPart") then
+        object.Material = "Plastic"
+        object.Reflectance = 0
+    elseif object:IsA("Decal") and decalsyeeted then 
+        object.Transparency = 1
+    elseif object:IsA("ParticleEmitter") or object:IsA("Trail") then 
+        object.Lifetime = NumberRange.new(0)
+    end
+end
+end)
 local Button = Section.NewButton("Audio Player",function()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/Syr0nix-Audio-Player/main/Audio%20Player'))();
 end)
@@ -183,7 +208,7 @@ local Section = Tab.NewSection("Wana Be Admin")
 local Button = Section.NewButton("Crash Server", function()
     local MasterKey = game.ReplicatedStorage:FindFirstChild('MasterKey')
     while true do
-        for i = 1, 7 do
+        for i = 1, 4 do
             MasterKey:FireServer('Age', 'Adult')
             MasterKey:FireServer('Age', 'Pup')
             MasterKey:FireServer('Age', 'Newborn')
@@ -219,7 +244,6 @@ function findPlayer(name)
     end
     return false
 end
-
 local plr = Section.Newtextbox('Player Name',function(self,value)
     local _plr = findPlayer(value)
     if _plr then
@@ -588,26 +612,24 @@ local enableSeats = Section.NewButton('Enable Sit',function()
         end
     end
 end)
-local Button = Section.NewButton("Female",function()
-	local args = {[1] = "Female"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
-local Button = Section.NewButton("Male",function()
-	local args = {[1] = "Male"}
-	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-end)
+local function createButton(name, arg1)
+    local args = {[1] = arg1}
+    Section.NewButton(name, function()
+        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+    end)
+end
+createButton("Female", "Female")
+createButton("Male", "Male")
 local function createButton(name, arg1, arg2)
-    local args = {[1] = arg1, [2] = arg2, [3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
+    local args = {[1] = arg1, [2] = arg2}
     Section.NewButton(name, function()
         game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
     end)
 end
-createButton("File 1", "LoadFile1Colours", "1")
-createButton("File 2", "LoadFile1Colours", "2")
-createButton("File 3", "LoadFile1Colours", "3")
-createButton("Save 1", "SaveFile1Colours", "1")
-createButton("Save 2", "SaveFile1Colours", "2")
-createButton("Save 3", "SaveFile1Colours", "3")
+for i = 1, 3 do
+    createButton("File " .. i, "LoadFile1Colours", tostring(i))
+    createButton("Save " .. i, "SaveFile1Colours", tostring(i))
+end
 local Button = Section.NewButton("Explorer",function()
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/DEX-Synapse-Edition/main/DEX'))();
 end)
@@ -808,37 +830,32 @@ local Button = Section.NewButton("scary face",function()
 	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
 	task.wait(0.1)
 end)
-local Button = Section.NewButton("Big DADY Cock",function()
---SAY10 Made this Code
-for _,v in next,game.Players.LocalPlayer.Character:children()do
-    if v:IsA'BasePart'and v.Name~='HumanoidRootPart'then
-        game.ReplicatedStorage.MasterKey:FireServer("Fluff", v.Name, 1)
-    end
+local function fireMasterKey(partName, color, advanced)
+    game:GetService("ReplicatedStorage").MasterKey:FireServer(partName, color, advanced)
 end
-game.ReplicatedStorage.MasterKey:FireServer("Fluff", "Torso", 0)
-game.ReplicatedStorage.MasterKey:FireServer("Fluff", "LeftThigh", 0)
-game.ReplicatedStorage.MasterKey:FireServer("Fluff", "RightThigh", 0)
-local G_1 = "remove"
-local G_2 = "HairF"
-local Event = game:GetService("ReplicatedStorage").Accessories
-Event:FireServer(G_1, G_2)
-local G_1 = "Torso"
-local G_2 = Color3.new(0.866667, 0.737255, 0.627451)
-local G_3 = "Advanced"
-game:GetService("ReplicatedStorage").MasterKey:FireServer(G_1, G_2, G_3)
-local G_1 = "LeftThigh"
-local G_2 = Color3.new(0.866667, 0.737255, 0.627451)
-local G_3 = "Advanced"
-game:GetService("ReplicatedStorage").MasterKey:FireServer(G_1, G_2, G_3)
-local G_1 = "RightThigh"
-local G_2 = Color3.new(0.866667, 0.737255, 0.627451)
-local G_3 = "Advanced"
-game:GetService("ReplicatedStorage").MasterKey:FireServer(G_1, G_2, G_3)
-local G_1 = "NeckReal"
-local G_2 = Color3.new(0.600, 0, 0)
-local G_3 = "Advanced"
-game:GetService("ReplicatedStorage").MasterKey:FireServer(G_1, G_2, G_3)
-print "SAY10 Made this BIG DADY COCK"
+local function removeAccessory(accessoryName)
+    local removeAction = "remove"
+    local event = game:GetService("ReplicatedStorage").Accessories
+    event:FireServer(removeAction, accessoryName)
+end
+local Button = Section.NewButton("Big DADY Cock", function()
+--code was made by Say10 aka Colby Cleaned by Syr0nix
+    for _, part in next, game.Players.LocalPlayer.Character:children() do
+        if part:IsA'BasePart' and part.Name ~= 'HumanoidRootPart' then
+            game.ReplicatedStorage.MasterKey:FireServer("Fluff", part.Name, 1)
+        end
+    end
+    game.ReplicatedStorage.MasterKey:FireServer("Fluff", "Torso", 0)
+    game.ReplicatedStorage.MasterKey:FireServer("Fluff", "LeftThigh", 0)
+    game.ReplicatedStorage.MasterKey:FireServer("Fluff", "RightThigh", 0)
+    removeAccessory("HairF")
+    local torsoColor = Color3.new(0.866667, 0.737255, 0.627451)
+    fireMasterKey("Torso", torsoColor, "Advanced")
+    local thighColor = Color3.new(0.866667, 0.737255, 0.627451)
+    fireMasterKey("LeftThigh", thighColor, "Advanced")
+    fireMasterKey("RightThigh", thighColor, "Advanced")
+    local neckColor = Color3.new(0.600, 0, 0)
+    fireMasterKey("NeckReal", neckColor, "Advanced")
 end)
 _G.Rainbowwings = false
 local EnabledToggle = Section.NewToggle("Rainbow wings", function(bool)
@@ -857,9 +874,9 @@ local EnabledToggle = Section.NewToggle("Rainbow wings", function(bool)
             }
         }
         game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
+        local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
         while _G.Rainbowwings do
             task.wait()
-            local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
             mk1:FireServer("customize", {
                 [1] = "EyeColor",
                 [2] = "Nose",
@@ -1089,7 +1106,6 @@ first_color.Value = COLOR2
 local current_color = Instance.new('Color3Value') -- fading value
 current_color.Value = first_color.value
 local TweenService = game:GetService('TweenService') -- get tween service
-
 local EnabledToggle = Section.NewToggle("particlefade",function(bool)
 	if _G.particlefade then
 		_G.particlefade = false
