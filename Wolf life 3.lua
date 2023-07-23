@@ -605,7 +605,11 @@ local function createButton(name, arg1, arg2)
         args = {[1] = arg1, [2] = arg2}
     end
     Section.NewButton(name, function()
-        game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
+        if arg1 == "Female" or arg1 == "Male" then
+            game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+        else
+            game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
+        end
     end)
 end
 createButton("Female", "Female")
