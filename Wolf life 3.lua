@@ -126,7 +126,6 @@ local EnabledToggle = Section.NewToggle("Mute VIW Music", function(bool)
         end
     end
 end)
-
 local timergb, RBW_COL = 7
 rgb1 = game:GetService('RunService').Heartbeat:Connect(function()
 	local hue = tick() % timergb / timergb
