@@ -54,7 +54,6 @@ local EnabledToggle = Section.NewToggle("SpamLights!", function(bool)
     else
         _G.SpamLights = true
     end
-
     while _G.SpamLights do
         for _, L in next, workspace.Models:GetDescendants() do
             if L:IsA("ClickDetector") then
