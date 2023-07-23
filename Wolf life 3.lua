@@ -276,10 +276,7 @@ local Mini = Instance.new("TextButton")
 local Log = Instance.new("TextButton")
 local title = Instance.new("TextLabel")
 local UIListLayoutt = Instance.new("UIListLayout", LogPanel)
-
-
 UIListLayoutt.VerticalAlignment = "Bottom"
-
 ChatGui.Name = "ChatGui"
 ChatGui.Parent = game.Players.LocalPlayer.PlayerGui
 ChatGui.ResetOnSpawn = false
@@ -360,9 +357,7 @@ local prevOutputPos = 0
 function output(plr, msg)
 	if not logging then return end
 	local colour = Color3.fromRGB(255,255,255)
-	
 	if string.sub(msg, 1,1) == ":" or string.sub(msg,1,1) == ";" then colour = Color3.fromRGB(255,0,0) elseif string.sub(msg,1,2) == "/w" or string.sub(msg,1,7) == "/whisper" or string.sub(msg,1,5) == "/team" or string.sub(msg,1,2) == "/t" then colour = Color3.fromRGB(0,0,255) else colour = Color3.fromRGB(255,255,255) end
-	
  	local o = Instance.new("TextLabel",LogPanel)
  	o.Text = plr.Name .. ": " .. msg
  	o.Size = UDim2.new(0.5,0,.006,0)
@@ -394,7 +389,6 @@ end)
 end)
 local Button = Section.NewButton("CTRL + Click TP",function()
     local UIS = game:GetService("UserInputService")
-
 local Player = game.Players.LocalPlayer
 local Mouse = Player:GetMouse()
 function GetCharacter()
@@ -413,12 +407,16 @@ UIS.InputBegan:Connect(function(input)
 end)
 end)
 local Button = Section.NewButton("Teleport all", function()
-    for i, v in pairs(game.Players:GetChildren()) do
-        game:GetService("ReplicatedStorage").CarryNewborn:FireServer(v)
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+    local carryNewborn = replicatedStorage.CarryNewborn
+    local masterKey = replicatedStorage.MasterKey
+    local players = game.Players:GetChildren()
+    for i, v in ipairs(players) do
+        carryNewborn:FireServer(v)
         wait(0.2)
-        game:GetService("ReplicatedStorage").MasterKey:FireServer("Spawn", "Adoption")
+        masterKey:FireServer("Spawn", "Adoption")
         wait(0.2)
-        game:GetService("ReplicatedStorage").CarryNewborn:FireServer("Kick Eggs")
+        carryNewborn:FireServer("Kick Eggs")
         wait(0.2)
     end
 end)
