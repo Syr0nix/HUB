@@ -2,13 +2,11 @@
 	Instruction for script:
 		Description Mode - only 1-4 mods
 		Description Text - text which will be automated in ur desc
-	
 	Desc Modes:
 		Mode 1 - default typing
 		Mode 2 - erase typing
 		Mode 3 - glitchy
 		Mode 4 - backward typing
-
 --]]
 -- Please wait for the cerdit panel its coming soon :)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/UI-lib-NEW/main/WL"))()
@@ -880,10 +878,10 @@ local EnabledToggle = Section.NewToggle("Rainbow wings", function(bool)
         end
     end
 end, false)
-_G.Rainbowwings = false
-local EnabledToggle = Section.NewToggle("Rainbow wings fade", function(bool)
-    _G.Rainbowwings = not _G.Rainbowwings
-    if _G.Rainbowwings then
+_G.Rainbowwingsflash = false
+local EnabledToggle = Section.NewToggle("Rainbow wings Flash", function(bool)
+    _G.Rainbowwingsflash = not _G.Rainbowwingsflash
+    if _G.Rainbowwingsflash then
         local Mat = "Neon"
         local SecondaryArgs = {[1] = "Material",[2] = Mat,[3] = {[1] = "DragonThird",[2] = "DragonPrimary",[3] = "OceanPrimary",[4] = "Nose",[5] = "EyeColor",}}
         game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
@@ -891,16 +889,16 @@ local EnabledToggle = Section.NewToggle("Rainbow wings fade", function(bool)
         -- Define the colors to fade between
         local colors = {Color3.new(1, 0, 0), Color3.new(0, 1, 0), Color3.new(0, 0, 1)}
         local colorIndex = 1
-        while _G.Rainbowwings do
+        while _G.Rainbowwingsflash do
             -- Get the current and next color
             local currentColor = colors[colorIndex]
             local nextColorIndex = colorIndex % #colors + 1
             local nextColor = colors[nextColorIndex]
             -- Interpolate between the current and next color
-            for i = 0, 1, 0.01 do
+            for i = 0, 1, 1 do
                 local color = currentColor:lerp(nextColor, i)
                 mk1:FireServer("customize", {[1] = "EyeColor",[2] = "Nose",[3] = "DragonPrimary",[4] = "DragonThird",[5] = "OceanPrimary",}, color, "Body")
-                task.wait(0.0) -- Increase the wait time to slow down the color change
+                task.wait(0.02) -- Increase the wait time to slow down the color change
             end
             -- Move to the next color
             colorIndex = nextColorIndex
