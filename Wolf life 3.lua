@@ -597,20 +597,19 @@ local enableSeats = Section.NewButton('Enable Sit',function()
         end
     end
 end)
-local function createButton(name, arg1)
-    local args = {[1] = arg1}
-    Section.NewButton(name, function()
-        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-    end)
-end
-createButton("Female", "Female")
-createButton("Male", "Male")
 local function createButton(name, arg1, arg2)
-    local args = {[1] = arg1, [2] = arg2}
+    local args
+    if arg1 == "LoadFile1Colours" or arg1 == "SaveFile1Colours" then
+        args = {[1] = arg1,[2] = arg2,[3] = "\195\137,\203\1561\194\181\195\154+t\226\149\165\195\1304\194\180\195\134\195\138\226\134\168\226\149\147"}
+    else
+        args = {[1] = arg1, [2] = arg2}
+    end
     Section.NewButton(name, function()
         game:GetService("ReplicatedStorage").Save:InvokeServer(unpack(args))
     end)
 end
+createButton("Female", "Female")
+createButton("Male", "Male")
 for i = 1, 3 do
     createButton("File " .. i, "LoadFile1Colours", tostring(i))
     createButton("Save " .. i, "SaveFile1Colours", tostring(i))
@@ -899,6 +898,33 @@ local EnabledToggle = Section.NewToggle("RGB Wings Flash", function(bool)
                 local color = currentColor:lerp(nextColor, i)
                 mk1:FireServer("customize", {[1] = "EyeColor",[2] = "Nose",[3] = "DragonPrimary",[4] = "DragonThird",[5] = "OceanPrimary",}, color, "Body")
                 task.wait(0.02) -- Increase the wait time to slow down the color change
+            end
+            -- Move to the next color
+            colorIndex = nextColorIndex
+        end
+    end
+end, false)
+_G.MonoChromeWingsFade = false
+local EnabledToggle = Section.NewToggle("MonoChrome Wings Fade", function(bool)
+    _G.MonoChromeWingsFade = not _G.MonoChromeWingsFade
+    if _G.MonoChromeWingsFade then
+        local Mat = "Neon"
+        local SecondaryArgs = {[1] = "Material",[2] = Mat,[3] = {[1] = "DragonThird",[2] = "DragonPrimary",[3] = "OceanPrimary",[4] = "Nose",[5] = "EyeColor",}}
+        game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(SecondaryArgs))
+        local mk1 = game:service('ReplicatedStorage'):FindFirstChild('MasterKey')
+        -- Define the colors to fade between
+        local colors = {Color3.new(1, 1, 1), Color3.new(0, 0, 0), Color3.new(1, 1, 1)}
+        local colorIndex = 1
+        while _G.MonoChromeWingsFade do
+            -- Get the current and next color
+            local currentColor = colors[colorIndex]
+            local nextColorIndex = colorIndex % #colors + 1
+            local nextColor = colors[nextColorIndex]
+            -- Interpolate between the current and next color
+            for i = 0, 1, 0.01 do
+                local color = currentColor:lerp(nextColor, i)
+                mk1:FireServer("customize", {[1] = "EyeColor",[2] = "Nose",[3] = "DragonPrimary",[4] = "DragonThird",[5] = "OceanPrimary",}, color, "Body")
+                task.wait(0.01) -- Increase the wait time to slow down the color change
             end
             -- Move to the next color
             colorIndex = nextColorIndex
