@@ -249,22 +249,16 @@ local plr = Section.Newtextbox('Player Name',function(self,value)
         self.Text = NAME
     end
 end)
-local Button = Section.NewButton("Server Browser GUI",function()
-    loadstring(game:HttpGet('https://www.scriptblox.com/raw/Server-Browser_80', true))();
-end)
-local Button = Section.NewButton("Server ID Joiner GUI",function()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/AzureServicess/Job-ID/main/Universal/lua'))()
-end)
-local Button = Section.NewButton("fates admin",function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
-end)
-local Button = Section.NewButton("Inf Yeld",function()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-end)
-local Button = Section.NewButton("Homebrew Admin",function()
-_G.CustomUI = false
-	loadstring(game:HttpGet(('https://raw.githubusercontent.com/mgamingpro/HomebrewAdmin/master/Main'),true))()
-end)
+local function createButton(name, url)
+    Section.NewButton(name, function()
+        loadstring(game:HttpGet(url, true))()
+    end)
+end
+local buttons = {{"fates admin", "https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"},{"Homebrew Admin", 'https://raw.githubusercontent.com/mgamingpro/HomebrewAdmin/master/Main'},{"Inf Yeld", 'https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'},{"Server Browser GUI", 'https://www.scriptblox.com/raw/Server-Browser_80'},{"Server ID Joiner GUI", 'https://raw.githubusercontent.com/AzureServicess/Job-ID/main/Universal/lua'}}
+table.sort(buttons, function(a, b) return a[1] < b[1] end)
+for _, button in pairs(buttons) do
+    createButton(button[1], button[2])
+end
 local Button = Section.NewButton("Chat Logger",function()
 -- Version: 2.82
 local ChatGui = Instance.new("ScreenGui")
