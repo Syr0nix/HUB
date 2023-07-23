@@ -851,7 +851,6 @@ local Button = Section.NewButton("all neon", function()
     local Legs = {"AccessoryMaterial", Mat, "FeetF"}
     local SecondaryArgs = {"Material", Mat, {"DragonSecondary", "OceanSecondary", "ChubbyCheeks", "Fat", "EarFluff", "JawFluff", "ChestFluff", "LegFluff", "Eyebrow1", "Eyebrow2", "Secondary", "Jaw", "RightShoulder", "RightLowerLeg", "RightLowerArm", "RightLeg", "RightFootPaw", "LeftArm", "LeftArmPaw", "LeftCarpal", "LeftFootPaw", "LeftLeg", "LeftLowerArm", "LeftLowerLeg", "LeftShoulder", "RightArm", "RightArmPaw", "RightCarpal","DragonThird"}}
     local PrimaryArgs = {"Material", Mat, {"DragonPrimary","OceanPrimary","BackFluff","TailFluff","LeftWingStart","LeftWing2","LeftWing3","RightWingStart","RightWing2","RightWing3","EyeLid","Torso","Tail1","Tail2","Tail3","Tail5","Tail6","RightThigh","RightEar","EyeLid","Head","Hip","LeftEar","LeftThigh","Muzzle","Neck","NeckReal","Nose"}}
-    
     local MasterKey = game:GetService("ReplicatedStorage").MasterKey
     MasterKey:FireServer(unpack(Hair))
     MasterKey:FireServer(unpack(Torso))
