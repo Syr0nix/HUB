@@ -879,7 +879,7 @@ local EnabledToggle = Section.NewToggle("Rainbow wings", function(bool)
     end
 end, false)
 _G.Rainbowwingsflash = false
-local EnabledToggle = Section.NewToggle("Rainbow wings Flash", function(bool)
+local EnabledToggle = Section.NewToggle("RGB Wings Flash", function(bool)
     _G.Rainbowwingsflash = not _G.Rainbowwingsflash
     if _G.Rainbowwingsflash then
         local Mat = "Neon"
