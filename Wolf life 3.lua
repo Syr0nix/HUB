@@ -841,6 +841,20 @@ local Button = Section.NewButton("Big DADY Cock", function()
     local neckColor = Color3.new(0.600, 0, 0)
     fireMasterKey("NeckReal", neckColor, "Advanced")
 end)
+local Button = Section.NewButton("all ForceField", function()
+    local Mat = "ForceField"
+    local Hair = {"AccessoryMaterial", Mat, "HairF"}
+    local Torso = {"AccessoryMaterial", Mat, "TorsoF"}
+    local Legs = {"AccessoryMaterial", Mat, "FeetF"}
+    local SecondaryArgs = {"Material", Mat, {"DragonSecondary", "OceanSecondary", "ChubbyCheeks", "Fat", "EarFluff", "JawFluff", "ChestFluff", "LegFluff", "Eyebrow1", "Eyebrow2", "Secondary", "Jaw", "RightShoulder", "RightLowerLeg", "RightLowerArm", "RightLeg", "RightFootPaw", "LeftArm", "LeftArmPaw", "LeftCarpal", "LeftFootPaw", "LeftLeg", "LeftLowerArm", "LeftLowerLeg", "LeftShoulder", "RightArm", "RightArmPaw", "RightCarpal","DragonThird"}}
+    local PrimaryArgs = {"Material", Mat, {"DragonPrimary","OceanPrimary","BackFluff","TailFluff","LeftWingStart","LeftWing2","LeftWing3","RightWingStart","RightWing2","RightWing3","EyeLid","Torso","Tail1","Tail2","Tail3","Tail5","Tail6","RightThigh","RightEar","EyeLid","Head","Hip","LeftEar","LeftThigh","Muzzle","Neck","NeckReal","Nose"}}
+    local MasterKey = game:GetService("ReplicatedStorage").MasterKey
+    MasterKey:FireServer(unpack(Hair))
+    MasterKey:FireServer(unpack(Torso))
+    MasterKey:FireServer(unpack(Legs))
+    MasterKey:FireServer(unpack(SecondaryArgs))
+    MasterKey:FireServer(unpack(PrimaryArgs))
+end)
 local Button = Section.NewButton("all neon", function()
     local Mat = "Neon"
     local Hair = {"AccessoryMaterial", Mat, "HairF"}
