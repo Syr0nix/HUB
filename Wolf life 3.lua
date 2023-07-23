@@ -13,8 +13,8 @@
 -- Please wait for the cerdit panel its coming soon :)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/UI-lib-NEW/main/WL"))()
 Window = Library.Main("WLF3 Syr0nix#0407","F5")
-local Tab = Window.NewTab("Gamepeass")
-local Section = Tab.NewSection("Spawners")
+local Tab = Window.NewTab("Main Tab")
+local Section = Tab.NewSection("ReSpawners")
 local Section2 = Tab.NewSection("BE FREE")
 local function createButton(section, name, arg1, arg2)
     local args = {[1] = arg1, [2] = arg2, [3] = "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD"}
