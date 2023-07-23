@@ -1104,7 +1104,6 @@ local EnabledToggle = Section.NewToggle("Mono Chrome Particle Fade",function(boo
 		Remote:FireServer("ColorParticle", current_color.Value)
 	end
 end)
-
 local Tab = Window.NewTab("Teleports")
 local function createButton(Section, name, callback)
     Section.NewButton(name, callback)
