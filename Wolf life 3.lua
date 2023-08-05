@@ -217,7 +217,7 @@ local BringButton = Section.NewButton("Bring Player", function()
     if playerToBring then
         game:GetService("ReplicatedStorage").CarryNewborn:FireServer(playerToBring)
         wait(0.2)
-        game:GetService("ReplicatedStorage").MasterKey:FireServer("Spawn", "Adoption")
+        game:GetService("ReplicatedStorage").MasterKey:FireServer("Spawn", "Volcano")
         wait(0.2)
         game:GetService("ReplicatedStorage").CarryNewborn:FireServer("Kick Eggs")
         wait(0.2)
