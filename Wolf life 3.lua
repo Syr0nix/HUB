@@ -230,14 +230,41 @@ function playerCheck(p)
     end
 end
 function findPlayer(name)
+    local nameLower = string.lower(name)
+    local bestMatch = nil
+    local bestMatchScore = math.huge
     for _,p in next,game:GetService('Players'):GetPlayers()do
         local pn = string.lower(p.Name)
         local pd = string.lower(p.DisplayName)
-        if (string.sub(name,1,#name)==string.sub(pn,1,#name) or string.sub(name,1,#name)==string.sub(pd,1,#name)) then
-            return p
+        local score1 = levenshtein(nameLower, pn)
+        local score2 = levenshtein(nameLower, pd)
+        local score = math.min(score1, score2)
+        if score < bestMatchScore then
+            bestMatchScore = score
+            bestMatch = p
         end
     end
-    return false
+    return bestMatch
+end
+function levenshtein(str1, str2)
+    local len1, len2 = #str1, #str2
+    local matrix = {}
+    for i = 0, len1 do
+        matrix[i] = {[0] = i}
+    end
+    for j = 0, len2 do
+        matrix[0][j] = j
+    end
+    for j = 1, len2 do
+        for i = 1, len1 do
+            if (str1:byte(i) == str2:byte(j)) then
+                matrix[i][j] = matrix[i-1][j-1]
+            else
+                matrix[i][j] = math.min(matrix[i-1][j], matrix[i][j-1], matrix[i-1][j-1]) + 1
+            end
+        end
+    end
+    return matrix[len1][len2]
 end
 local plr = Section.Newtextbox('Player Name',function(self,value)
     local _plr = findPlayer(value)
@@ -246,6 +273,28 @@ local plr = Section.Newtextbox('Player Name',function(self,value)
         self.Text = NAME
     end
 end)
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        character.Humanoid.Died:Connect(function()
+            -- code to run when a new player joins the game and their character dies
+            -- for example, you could reset the NAME variable to the new player's name:
+            NAME = player.Name
+            -- or you could call the BringButton function to bring the new player:
+            BringButton()
+        end)
+    end)
+end)
+for _,player in pairs(game.Players:GetPlayers()) do
+    player.CharacterAdded:Connect(function(character)
+        character.Humanoid.Died:Connect(function()
+            -- code to run when an existing player's character dies
+            -- for example, you could reset the NAME variable to the existing player's name:
+            NAME = player.Name
+            -- or you could call the BringButton function to bring the existing player:
+            BringButton()
+        end)
+    end)
+end
 local function createButton(name, url)
     Section.NewButton(name, function()
         loadstring(game:HttpGet(url, true))()
