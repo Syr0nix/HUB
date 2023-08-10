@@ -10,7 +10,7 @@
 --]]
 -- Please wait for the cerdit panel its coming soon :)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/UI-lib-NEW/main/WL"))()
-Window = Library.Main("WLF3 Syr0nix#0407", "F5")
+Window = Library.Main("WLF3 syr0nix5257", "F5")
 local Tab = Window.NewTab("Main Tab")
 local Section = Tab.NewSection("ReSpawners")
 local Section2 = Tab.NewSection("BE FREE")
