@@ -36,15 +36,27 @@ local Button = Section.NewButton("VIW TAG", function()
     game.ReplicatedStorage.MasterKey:FireServer("AddVIWTag", nil,
         "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD")
 end)
-local Button = Section.NewButton("Remove Name tags", function()
-    local args = { [1] = "ChangeDesc", [2] = "",
-        [3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151\153" }
-    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-    local args = { [1] = "ChangeName", [2] = "",
-        [3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151\153" }
-    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
-    game.Players.LocalPlayer.Character.Head.NameTag.Main.Pack:remove()
-    game.Players.LocalPlayer.Character.Head.NameTag.Main.VIW:remove()
+local Audioplayer = Section.Newtextbox('Enter Audio ID here', function(self, value)
+    local id = tonumber(value)
+    if id then
+        game.ReplicatedStorage.MasterKey:FireServer("PlayMusic", id, "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD")
+    end
+end)
+local Button = Section.NewButton("Stop Music", function()
+    game.ReplicatedStorage.MasterKey:FireServer("StopMusic", nil, "\230\139\154\230\136\172i\235\156\146(\238\138\155\201\172XD")
+end)
+_G.autoaudiomute = false
+local EnabledToggle = Section.NewToggle("Mute VIW Music", function(bool)
+    _G.autoaudiomute = not _G.autoaudiomute
+    while _G.autoaudiomute do
+        task.wait()
+        for _, v in next, game:GetService('Players'):GetPlayers() do
+            if v ~= game.Players.LocalPlayer and v.Character and v.Character.Parent ~= nil and v.Character:FindFirstChild('HumanoidRootPart') and v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM') then
+                v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM'):Stop()
+                v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM').Playing = false
+            end
+        end
+    end
 end)
 --Made by: Flixz_y and Colby
 _G.SpamLights = false
@@ -110,21 +122,15 @@ local Button = Section.NewButton("FPS BOOSTER", function()
         end
     end
 end)
-local Button = Section.NewButton("Audio Player", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/Syr0nix-Audio-Player/main/Audio%20Player'))();
-end)
-_G.autoaudiomute = false
-local EnabledToggle = Section.NewToggle("Mute VIW Music", function(bool)
-    _G.autoaudiomute = not _G.autoaudiomute
-    while _G.autoaudiomute do
-        task.wait()
-        for _, v in next, game:GetService('Players'):GetPlayers() do
-            if v ~= game.Players.LocalPlayer and v.Character and v.Character.Parent ~= nil and v.Character:FindFirstChild('HumanoidRootPart') and v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM') then
-                v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM'):Stop()
-                v.Character:FindFirstChild('HumanoidRootPart'):FindFirstChild('RadioM').Playing = false
-            end
-        end
-    end
+local Button = Section.NewButton("Remove Name tags", function()
+    local args = { [1] = "ChangeDesc", [2] = "",
+        [3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151\153" }
+    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+    local args = { [1] = "ChangeName", [2] = "",
+        [3] = "\226\128\153b%5m\226\128\176}0\195\1383t\195\154\226\149\147\195\146\226\148\140\226\128\166\226\151\153" }
+    game:GetService("ReplicatedStorage").MasterKey:FireServer(unpack(args))
+    game.Players.LocalPlayer.Character.Head.NameTag.Main.Pack:remove()
+    game.Players.LocalPlayer.Character.Head.NameTag.Main.VIW:remove()
 end)
 local timergb, RBW_COL = 7
 rgb1 = game:GetService('RunService').Heartbeat:Connect(function()
