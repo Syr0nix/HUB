@@ -9,3 +9,8 @@ task.wait(2)
 game.ReplicatedStorage:WaitForChild("Constants")
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/HUB/main/Whitelisted_3'))();
 ontp("if not game:IsLoaded() then game.Loaded:Wait() end wait() if not game.Players.LocalPlayer.Character then game.Players.LocalPlayer.CharacterAdded:Wait() end loadstring(game:HttpGet('https://raw.githubusercontent.com/Syr0nix/HUB/main/Loader'))()");
+wait(5)
+
+loadstring(game:HttpGet(
+	"https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"
+))();
